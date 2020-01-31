@@ -72,7 +72,7 @@ For example, you can use this Docker image in a [Concourse](https:/concourse-ci.
 
 Use these commands to build this Docker image:
 ```bash
-$ docker build . -t $DOCKER_ORG/pb-cli --build-arg PIVNET_TOKEN=$PIVNET_TOKEN
+$ docker build . -t $DOCKER_ORG/pb-cli:$PB_VERSION --build-arg PIVNET_TOKEN=$PIVNET_TOKEN
 $ docker push $DOCKER_ORG/pb-cli:$PB_VERSION
 ```
 
