@@ -68,6 +68,14 @@ For example, you can use this Docker image in a [Concourse](https:/concourse-ci.
         pb image apply -f image.yml
 ```
 
+## Build
+
+Use these commands to build this Docker image:
+```bash
+$ docker build . -t $DOCKER_ORG/pb-cli --build-arg PIVNET_TOKEN=$PIVNET_TOKEN
+$ docker push $DOCKER_ORG/pb-cli:$PB_VERSION
+```
+
 ## Contribute
 
 Contributions are always welcome!
@@ -79,8 +87,3 @@ Feel free to open issues & send PR.
 Copyright &copy; 2019 [Pivotal Software, Inc](https://pivotal.io).
 
 This project is licensed under the [Apache Software License version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
-
-## Build
-
-docker build . -t $DOCKER_ORG/pb-cli --build-arg PIVNET_TOKEN=$PIVNET_TOKEN
-docker push $DOCKER_ORG/pb-cli:0.0.4
