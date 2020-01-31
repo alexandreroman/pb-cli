@@ -12,18 +12,18 @@ This image contains the `pb` CLI as an entrypoint.
 
 Run this Docker image, just like `pb`:
 ```bash
-$ docker run --rm alexandreroman/pb-cli:0.0.3 help
+$ docker run --rm alexandreroman/pb-cli:0.0.4 help
 Usage:
   pb [command]
 
 Available Commands:
-  api
+  api         
   help        Help about any command
   image       Image commands
   login       Log user in
   logout      Log user out
+  project     Project commands
   secrets     Secret commands
-  team        Team commands
   version     Show CLI and targeted build service version
 
 Flags:
@@ -44,7 +44,7 @@ For example, you can use this Docker image in a [Concourse](https:/concourse-ci.
       type: docker-image
       source:
         repository: alexandreroman/pb-cli
-        tag: 0.0.3
+        tag: 0.0.4
     inputs:
       - name: source-code
     run:
@@ -53,7 +53,6 @@ For example, you can use this Docker image in a [Concourse](https:/concourse-ci.
       - -c
       - |
         cat > image.yml << EOF
-        team: myteam
         source:
           git:
             url: http://github.com/myorg/myapp.git
@@ -65,7 +64,16 @@ For example, you can use this Docker image in a [Concourse](https:/concourse-ci.
         export BUILD_SERVICE_PASSWORD=((build-password))
         pb api set ((build-target)) --skip-ssl-validation
         pb login
+        pb project target ((build-project))
         pb image apply -f image.yml
+```
+
+## Build
+
+Use these commands to build this Docker image:
+```bash
+$ docker build . -t $DOCKER_ORG/pb-cli --build-arg PIVNET_TOKEN=$PIVNET_TOKEN
+$ docker push $DOCKER_ORG/pb-cli:$PB_VERSION
 ```
 
 ## Contribute
